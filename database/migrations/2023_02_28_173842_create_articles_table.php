@@ -1,0 +1,28 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+   
+    public function up(): void
+    {
+        Schema::create('article', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('localId')->unsigned();
+            $table->foreign('localId')->references('id')->on('article_writers');
+
+            $table->String('title');
+            $table->String('description');
+            $table->String('url');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('article');
+    }
+};
